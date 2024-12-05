@@ -1,0 +1,56 @@
+{
+  "name": "project-skeleton-typescript",
+  "version": "1.0.0",
+  "description": "Node Express MVC Project Skeleton By Saifeddine RHOUMA",
+  "main": "dist/server.js",
+  "engines": {
+    "node": "^18.12.0",
+    "npm": "> 6.0"
+  },
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json",
+    "start:dev": "cross-env NODE_ENV=development nodemon --config ./nodemon.json src/server.ts",
+    "start:prod": "cross-env NODE_ENV=production node dist/server.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "debug": "npm run start:dev -- --inspect",
+    "format": "prettier ./src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "Skeleton",
+    "Node",
+    "Express",
+    "MVC",
+    "TypeScript"
+  ],
+  "author": "Saifeddine RHOUMA",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
+    "husky": "^9.1.7",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
+  },
+  "dependencies": {
+    "@types/morgan": "^1.9.9",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "envalid": "^8.0.0",
+    "express": "^4.21.1",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "picocolors": "^1.1.1",
+    "winston": "^3.17.0"
+  }
+}
