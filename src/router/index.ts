@@ -1,18 +1,22 @@
 import express, { Express, Router as IRouter } from 'express';
 
-import HTTP_CODE from '@constants/httpCode';
-import IRouteGroup from '@tsTypes/IRouteGroup';
-import runAsyncWrapper from '@utils/runAsyncWrapper';
+import { AuthRoutes } from './apis/auth.routes';
+import HTTP_CODE from '../core/constants/httpCode';
+import IRouteGroup from '../types/IRouteGroup';
+import runAsyncWrapper from '../utils/runAsyncWrapper';
 
 class Router {
   router: IRouter;
+  authRoutes: IRouteGroup;
+
   constructor() {
     this.router = express.Router();
+    this.authRoutes = AuthRoutes;
   }
 
   public create(app: Express) {
     // TODO : attach middleware
-    // this._attachApiRoutes();
+    this._handleAuthAPI();
     this._handlePageNotFound();
     this._handleExceptions();
     app.use(this.router);
@@ -32,12 +36,19 @@ class Router {
     });
   }
 
+  //! Apis Routes
+
+  private _handleAuthAPI() {
+    this._attachRoutes(this.authRoutes, '/api');
+  }
+
   private _attachRoutes(routeGroup: IRouteGroup, prefix: string = '') {
     [routeGroup].forEach(({ group, routes }) => {
-      routes.forEach(({ method, path, middleware = [], handler }) => {
+      routes.forEach(({ method, path, middleware = [], validator = [], handler }) => {
         this.router[method](
           prefix + group.prefix + path,
           [...(group.middleware || []), ...middleware],
+          [...validator],
           runAsyncWrapper(handler)
         );
       });

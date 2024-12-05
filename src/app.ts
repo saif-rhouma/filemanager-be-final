@@ -5,6 +5,7 @@ import pc from 'picocolors';
 import httpLogger from 'morgan';
 
 import environment from './configs/environment';
+import Router from './router';
 
 class App {
   app: Express;
@@ -25,10 +26,14 @@ class App {
   }
 
   public start() {
+    this._setupRoutes();
     this._listen();
   }
 
-  // private _setupRoutes() {}
+  private _setupRoutes() {
+    Router.create(this.app);
+  }
+
   private _listen() {
     const { PORT, NODE_ENV } = environment;
     this.app.listen(PORT, () => {

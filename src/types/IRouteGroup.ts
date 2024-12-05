@@ -3,7 +3,7 @@ import { IRoute } from './IRoute';
 export default interface IRouteGroup {
   group: {
     prefix: string;
-    middleware: [];
+    middleware?: [];
   };
   routes: IRoute[];
 }

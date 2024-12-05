@@ -15,7 +15,10 @@
     "lint:fix": "eslint --fix src",
     "debug": "npm run start:dev -- --inspect",
     "format": "prettier ./src",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:up": "npx typeorm migration:run -d ./src/database/data-source.ts",
+    "migration:down": "npx typeorm migration:revert -d ./src/database/data-source.ts",
+    "typeorm:sync": "npx typeorm schema:sync",
     "prepare": "husky"
   },
   "keywords": [
@@ -51,6 +54,14 @@
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "picocolors": "^1.1.1",
-    "winston": "^3.17.0"
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.20",
+    "winston": "^3.17.0",
+    "zod": "^3.23.8"
+  },
+  "_moduleAliases": {
+    "@constants": "build/src/app/constants/",
+    "@utils": "build/src/utils",
+    "@tsTypes": "build/src/types"
   }
 }
