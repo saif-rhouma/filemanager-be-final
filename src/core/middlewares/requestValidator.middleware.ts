@@ -8,10 +8,10 @@ class RequestValidator {
   constructor(schema: AnyZodObject) {
     this.schema = schema;
   }
-  // The middleware method that will be used in routes
-  public body: Middleware<void> = (req: Request, res: Response, next: NextFunction) => {
+
+  private _validator(req: Request, res: Response, next: NextFunction, type: 'body' | 'query' | 'params') {
     try {
-      this.schema.parse(req.body);
+      this.schema.parse(req[type]);
       next();
     } catch (error: unknown) {
       if (error instanceof ZodError) {
@@ -19,6 +19,18 @@ class RequestValidator {
       }
       return res.status(500).json({ error: 'Internal Server Error' });
     }
+  }
+
+  public body: Middleware<void> = (req: Request, res: Response, next: NextFunction) => {
+    this._validator(req, res, next, 'body');
+  };
+
+  public query: Middleware<void> = (req: Request, res: Response, next: NextFunction) => {
+    this._validator(req, res, next, 'query');
+  };
+
+  public params: Middleware<void> = (req: Request, res: Response, next: NextFunction) => {
+    this._validator(req, res, next, 'params');
   };
 }
 export default RequestValidator;
