@@ -1,5 +1,5 @@
+import pc from 'picocolors';
 import AppDataSource from './data-source';
-
 class Database {
   retries = 10;
   retryInterval = 5000; // 5 seconds
@@ -7,7 +7,7 @@ class Database {
   connect() {
     return AppDataSource.initialize()
       .then(() => {
-        console.log('Connected to database');
+        console.log(pc.inverse(pc.greenBright(`Server is Connected To Database Successfully`)));
       })
       .catch((error) => {
         console.error('Failed to connect to database:', error);

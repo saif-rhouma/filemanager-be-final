@@ -9,6 +9,8 @@ const environment = cleanEnv(process.env, {
   DB_NAME: str(),
   DB_USER: str(),
   DB_PASSWORD: str(),
+  ACCESS_TOKEN_SECRET: str(),
+  REFRESH_TOKEN_SECRET: str(),
 });
 
 export default environment;

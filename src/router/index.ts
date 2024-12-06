@@ -1,6 +1,7 @@
 import express, { Express, Router as IRouter } from 'express';
 
 import { AuthRoutes } from './apis/auth.routes';
+import { ExampleRoutes } from './apis/example.routes';
 import HTTP_CODE from '../core/constants/httpCode';
 import IRouteGroup from '../types/IRouteGroup';
 import runAsyncWrapper from '../utils/runAsyncWrapper';
@@ -8,14 +9,17 @@ import runAsyncWrapper from '../utils/runAsyncWrapper';
 class Router {
   router: IRouter;
   authRoutes: IRouteGroup;
+  exampleRoutes: IRouteGroup;
 
   constructor() {
     this.router = express.Router();
     this.authRoutes = AuthRoutes;
+    this.exampleRoutes = ExampleRoutes;
   }
 
   public create(app: Express) {
     // TODO : attach middleware
+    this._handleExampleAPI();
     this._handleAuthAPI();
     this._handlePageNotFound();
     this._handleExceptions();
@@ -40,6 +44,10 @@ class Router {
 
   private _handleAuthAPI() {
     this._attachRoutes(this.authRoutes, '/api');
+  }
+
+  private _handleExampleAPI() {
+    this._attachRoutes(this.exampleRoutes, '/api/test');
   }
 
   private _attachRoutes(routeGroup: IRouteGroup, prefix: string = '') {

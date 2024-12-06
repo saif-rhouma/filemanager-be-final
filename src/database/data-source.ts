@@ -16,7 +16,7 @@ const AppDataSource = new DataSource({
   username: environment.DB_USER,
   password: environment.DB_PASSWORD,
   synchronize: environment.isDev,
-  logging: environment.isDev,
+  logging: false,
   entities: [User],
   migrationsTableName: 'migrations',
   migrations: [migrationsPath],

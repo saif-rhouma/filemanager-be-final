@@ -40,7 +40,7 @@ class App {
       console.log(
         pc.inverse(
           pc.cyanBright(
-            `Server is running on port : ${pc.red(PORT)}! | Execution Environment : ${pc.red(NODE_ENV.toLocaleUpperCase())}`
+            `Server is Running on port : ${pc.red(PORT)}! | Execution Environment : ${pc.red(NODE_ENV.toLocaleUpperCase())}`
           )
         )
       );

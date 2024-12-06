@@ -16,9 +16,9 @@ class BaseRepository<T extends ObjectLiteral> {
     return this.repo.find();
   }
 
-  async findOne(id: number): Promise<T | null> {
+  async findOne(id: number | string): Promise<T | null> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.repo.findOneBy({ id } as any); // Adjust key based on your entity's primary column
+    return this.repo.findOneBy({ id } as any);
   }
 
   async update(id: number, data: DeepPartial<T>): Promise<T | null> {
@@ -29,16 +29,10 @@ class BaseRepository<T extends ObjectLiteral> {
     return this.repo.save(entity);
   }
 
-  async delete(id: number): Promise<boolean> {
+  async destroy(id: number): Promise<boolean> {
     const result = await this.repo.delete(id);
     return result.affected !== 0;
   }
-
-  // async findBy() {}
-  // async getAll() {}
-  // async create() {}
-  // async update() {}
-  // async destroy() {}
 }
 
 export default BaseRepository;
