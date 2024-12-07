@@ -1,6 +1,8 @@
 import authMiddleware from '../../core/middlewares/auth.middleware';
 import exampleController from '../../core/controllers/example.controller';
+import fileManagerController from '../../core/controllers/filemanager.controller';
 import IRouteGroup from 'src/types/IRouteGroup';
+import Uploader from '../../core/middlewares/uploader.middleware';
 
 export const ExampleRoutes: IRouteGroup = {
   group: {
@@ -17,6 +19,12 @@ export const ExampleRoutes: IRouteGroup = {
       path: '/protected',
       middleware: [authMiddleware],
       handler: exampleController.authProtected,
+    },
+    {
+      method: 'post',
+      path: '/',
+      middleware: [Uploader.single('file')],
+      handler: fileManagerController.upload,
     },
   ],
 };
