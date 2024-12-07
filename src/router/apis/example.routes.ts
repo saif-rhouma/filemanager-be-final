@@ -26,5 +26,11 @@ export const ExampleRoutes: IRouteGroup = {
       middleware: [Uploader.single('file')],
       handler: fileManagerController.upload,
     },
+
+    {
+      method: 'get',
+      path: '/download/:fileName',
+      handler: fileManagerController.download,
+    },
   ],
 };

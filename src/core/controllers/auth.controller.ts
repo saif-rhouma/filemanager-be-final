@@ -16,7 +16,6 @@ class AuthController {
 
   login: AsyncRouteHandler = async (req: Request, res: Response) => {
     const userData: { email: string; password: string } = req.body;
-    console.log('---> email', userData.email);
     const user = await authService.login(userData.email, userData.password);
     res.status(HTTP_CODE.Ok).json(serializeDTO(AuthLoginDTO, user));
   };

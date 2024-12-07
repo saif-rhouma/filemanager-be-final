@@ -36,7 +36,11 @@ class Router {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.router.use((err, _req, res, _next) => {
       err.statusCode = err.status || err.statusCode || HTTP_CODE.InternalServerError;
-      return res.status(err.statusCode).send(err.message);
+      return res.status(err.statusCode).json({
+        errorCode: err.message,
+        statusCode: err.status,
+        details: err.details,
+      });
     });
   }
 

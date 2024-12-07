@@ -8,7 +8,13 @@ class ExampleController {
   };
 
   public: AsyncRouteHandler = async (_req: Request, res: Response) => {
-    res.status(HTTP_CODE.Ok).json('Public Route TEST');
+    const taskList = [
+      { id: 1, title: 'walk the dog', isDone: false },
+      { id: 2, title: 'wash dishes', isDone: false },
+      { id: 3, title: 'drink coffee', isDone: true },
+      { id: 4, title: 'take a nap', isDone: false },
+    ];
+    res.status(HTTP_CODE.Ok).json(taskList);
   };
 }
 
