@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import AsyncRouteHandler from 'src/types/AsyncRouteHandler';
+
 import HTTP_CODE from '../constants/httpCode';
 import serializeDTO from '../../utils/serializeDto';
 import { AuthSignUpDTO } from '../dtos/auth.signup.dtos';
 import authService from '../services/auth.service';
 import usersService from '../services/users.service';
 import { AuthLoginDTO } from '../dtos/auth.login.dtos';
+import AsyncRouteHandler from 'types/AsyncRouteHandler';
 
 class AuthController {
   signUpUser: AsyncRouteHandler = async (req: Request, res: Response) => {

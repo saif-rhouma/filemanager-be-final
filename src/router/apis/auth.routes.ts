@@ -1,10 +1,10 @@
 import authController from '../../core/controllers/auth.controller';
-import IRouteGroup from 'src/types/IRouteGroup';
 import { userLoginSchema } from '../../core/middlewares/validators/auth/login.schema';
 import { userSignUpSchema } from '../../core/middlewares/validators/auth/signup.schema';
 import { refreshTokenSchema } from '../../core/middlewares/validators/auth/refresh.token';
 import RequestValidator from '../../core/middlewares/requestValidator.middleware';
 import authMiddleware from '../../core/middlewares/auth.middleware';
+import IRouteGroup from 'types/IRouteGroup';
 
 export const AuthRoutes: IRouteGroup = {
   group: {

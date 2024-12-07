@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
-import Middleware from 'src/types/Middleware';
+import Middleware from 'types/Middleware';
+
 import { AnyZodObject, ZodError } from 'zod';
 
 class RequestValidator {

@@ -12,6 +12,10 @@ class BaseRepository<T extends ObjectLiteral> {
     return this.repo.save(entity);
   }
 
+  async save(entity: T): Promise<T> {
+    return this.repo.save(entity);
+  }
+
   async findAll(): Promise<T[]> {
     return this.repo.find();
   }

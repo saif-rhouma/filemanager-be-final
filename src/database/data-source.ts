@@ -4,6 +4,8 @@ import { join } from 'path';
 import environment from '../configs/environment';
 //! MODELS IMPORT START
 import { User } from '../core/models/user.model';
+import { File } from '../core/models/file.model';
+import { Tag } from '../core/models/tag.model';
 //! MODELS IMPORT END
 
 const migrationsPath = join(__dirname, '..', 'database/migrations/**/*.ts');
@@ -17,7 +19,7 @@ const AppDataSource = new DataSource({
   password: environment.DB_PASSWORD,
   synchronize: environment.isDev,
   logging: false,
-  entities: [User],
+  entities: [User, File, Tag],
   migrationsTableName: 'migrations',
   migrations: [migrationsPath],
   subscribers: [],

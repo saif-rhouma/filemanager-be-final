@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import Middleware from 'src/types/Middleware';
-import UnauthorizedException from '../exceptions/unauthorizedException';
+import Middleware from 'types/Middleware';
+import UnauthorizedException from '../exceptions/unauthorized.exception';
 import { MSG_EXCEPTION } from '../constants/messages';
 import jwt from 'jsonwebtoken';
 import environment from '../../configs/environment';

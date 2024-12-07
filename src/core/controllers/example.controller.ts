@@ -1,4 +1,4 @@
-import AsyncRouteHandler from 'src/types/AsyncRouteHandler';
+import AsyncRouteHandler from 'types/AsyncRouteHandler';
 import HTTP_CODE from '../constants/httpCode';
 import { Request, Response } from 'express';
 

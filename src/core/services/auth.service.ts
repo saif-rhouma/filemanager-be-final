@@ -1,6 +1,6 @@
 import { hashPassword } from '../../helpers/auth.helpers';
 import { MSG_EXCEPTION } from '../constants/messages';
-import UnauthorizedException from '../exceptions/unauthorizedException';
+import UnauthorizedException from '../exceptions/unauthorized.exception';
 import usersRepository from '../repositories/user.repository';
 import { User } from '../models/user.model';
 import { scrypt as _scrypt } from 'crypto';
@@ -54,7 +54,7 @@ class AuthService {
   async generateUserTokens(user) {
     delete user.password;
     const accessToken = jwt.sign({ user }, environment.ACCESS_TOKEN_SECRET, {
-      expiresIn: '1m',
+      expiresIn: '3d',
     });
     const refreshToken = jwt.sign({ user }, environment.REFRESH_TOKEN_SECRET);
     return { accessToken, refreshToken };

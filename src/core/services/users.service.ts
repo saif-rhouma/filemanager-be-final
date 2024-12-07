@@ -8,6 +8,9 @@ class UsersService {
   findByEmail(email: string) {
     return this.usersRepository.findByEmail(email);
   }
+  findOneById(userId: string) {
+    return this.usersRepository.findOne(userId);
+  }
 }
 
 export default new UsersService();
