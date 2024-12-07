@@ -70,7 +70,9 @@ class FileManagerController {
       const filePath = path.join(__dirname, '../../uploads', file.filename);
 
       if (existsSync(filePath)) {
+        // TODO: SHOULD BE CONVERTED TO A MIDDLEWARE!
         await filesService.incrementView(file);
+        // END TODO
         return res.sendFile(filePath);
       } else {
         throw new Error();
@@ -80,9 +82,8 @@ class FileManagerController {
     }
   };
 
-  /// This is NOT GOOD , SORRY I DON4T HAHE MUCH TIME
+  /// This is NOT GOOD , SORRY I DON4T HAVE MUCH TIME
   getFileWithoutIncrementView: AsyncRouteHandler = async (req: Request, res: Response) => {
-    console.log('---> Hello');
     try {
       const { fileId } = req.params;
       const file = await filesService.findOneById(fileId);
