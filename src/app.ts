@@ -11,18 +11,19 @@ class App {
   app: Express;
   constructor() {
     this.app = express();
+    this.app.use(cors({ origin: '*' }));
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.app.use(httpLogger('dev', { skip: (_req, _res) => environment.isTest }));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(helmet());
-    this.app.use(
-      cors({
-        credentials: true,
-        origin: ['*'],
-        methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH', 'OPTIONS'],
-      })
-    );
+    // this.app.use(
+    //   cors({
+    //     credentials: true,
+    //     origin: '*',
+    //     methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH', 'OPTIONS'],
+    //   })
+    // );
   }
 
   public start() {

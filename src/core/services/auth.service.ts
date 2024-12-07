@@ -54,10 +54,16 @@ class AuthService {
   async generateUserTokens(user) {
     delete user.password;
     const accessToken = jwt.sign({ user }, environment.ACCESS_TOKEN_SECRET, {
-      expiresIn: '3d',
+      expiresIn: '1m',
     });
     const refreshToken = jwt.sign({ user }, environment.REFRESH_TOKEN_SECRET);
     return { accessToken, refreshToken };
+  }
+
+  async refreshToken(refreshToken: string) {
+    const user = await jwt.verify(refreshToken, environment.REFRESH_TOKEN_SECRET);
+    const { accessToken } = await this.generateUserTokens(user);
+    return { accessToken };
   }
 }
 
