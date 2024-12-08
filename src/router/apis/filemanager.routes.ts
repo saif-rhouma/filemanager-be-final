@@ -27,7 +27,7 @@ export const FileManagerRoutes: IRouteGroup = {
     {
       method: 'get',
       path: '/:fileId',
-      handler: fileManagerController.getFileWithoutIncrementView,
+      handler: fileManagerController.getFile,
     },
   ],
 };

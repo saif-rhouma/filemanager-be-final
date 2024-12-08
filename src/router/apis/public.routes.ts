@@ -1,6 +1,7 @@
 import IRouteGroup from 'types/IRouteGroup';
 import fileManagerController from '../../core/controllers/filemanager.controller';
 import sharedMiddleware from '../../core/middlewares/shared.middleware';
+import shareVisitMiddleware from '../../core/middlewares/shareVisit.middleware';
 
 export const PublicRoutes: IRouteGroup = {
   group: {
@@ -10,7 +11,7 @@ export const PublicRoutes: IRouteGroup = {
     {
       method: 'get',
       path: '/shared/view/:fileId',
-      middleware: [sharedMiddleware],
+      middleware: [sharedMiddleware, shareVisitMiddleware],
       handler: fileManagerController.getFile,
     },
   ],

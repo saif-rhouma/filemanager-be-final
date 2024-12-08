@@ -8,6 +8,8 @@ import { PublicRoutes } from './apis/public.routes';
 import HTTP_CODE from '../core/constants/httpCode';
 import IRouteGroup from '../types/IRouteGroup';
 import runAsyncWrapper from '../utils/runAsyncWrapper';
+import NotFoundException from '../core/exceptions/notFound.exception';
+import { MSG_EXCEPTION } from '../core/constants/messages';
 
 class Router {
   router: IRouter;
@@ -41,8 +43,13 @@ class Router {
   }
 
   private _handlePageNotFound() {
+    const MSG_SERVER_WELCOME = 'Route Not Found However - Challenge Backend Say Hello World!';
     this.router.all('*', async (_req, res) => {
-      res.status(HTTP_CODE.NotFound).send('Page Not Found');
+      res
+        .status(HTTP_CODE.NotFound)
+        .json(
+          new NotFoundException(MSG_EXCEPTION.NOT_FOUND_ROUTE, HTTP_CODE.NotFound, { context: MSG_SERVER_WELCOME })
+        );
     });
   }
 

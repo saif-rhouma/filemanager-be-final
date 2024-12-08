@@ -28,8 +28,9 @@ class FileManagerController {
       res.status(HTTP_CODE.Ok).json(payload);
     }
 
-    throw new BaseException(MSG_EXCEPTION.OTHER_BAD_PASSWORD);
+    throw new BaseException(MSG_EXCEPTION.OTHER_SOMETHING_WENT_WRONG);
   };
+  // FOR DOWNLOADING LARGE FILE USING STREAM
   download: AsyncRouteHandler = async (req: Request, res: Response) => {
     const { fileName } = req.params;
 
@@ -37,7 +38,7 @@ class FileManagerController {
 
     const stat = fs.statSync(filePath);
 
-    res.writeHead(200, {
+    res.writeHead(HTTP_CODE.Ok, {
       'Content-Type': 'application/zip',
       'Content-Length': stat.size,
       'Content-Disposition': `attachment; filename="${fileName}"`,
@@ -49,7 +50,7 @@ class FileManagerController {
 
     fileStream.on('error', (err) => {
       console.error('Error during file streaming:', err);
-      res.status(500).send('File streaming failed.');
+      res.status(HTTP_CODE.InternalServerError).send('File streaming failed.');
     });
   };
   createShareLink: AsyncRouteHandler = async (req: Request, res: Response) => {
@@ -70,33 +71,12 @@ class FileManagerController {
       const filePath = path.join(__dirname, '../../uploads', file.filename);
 
       if (existsSync(filePath)) {
-        // TODO: SHOULD BE CONVERTED TO A MIDDLEWARE!
-        await filesService.incrementView(file);
-        // END TODO
-        return res.sendFile(filePath);
+        return res.status(HTTP_CODE.Ok).sendFile(filePath);
       } else {
         throw new Error();
       }
     } catch (error) {
-      return res.sendFile(error);
-    }
-  };
-
-  /// This is NOT GOOD , SORRY I DON4T HAVE MUCH TIME
-  getFileWithoutIncrementView: AsyncRouteHandler = async (req: Request, res: Response) => {
-    try {
-      const { fileId } = req.params;
-      const file = await filesService.findOneById(fileId);
-
-      const filePath = path.join(__dirname, '../../uploads', file.filename);
-
-      if (existsSync(filePath)) {
-        return res.sendFile(filePath);
-      } else {
-        throw new Error();
-      }
-    } catch (error) {
-      return res.sendFile(error);
+      return res.status(HTTP_CODE.BadRequest).sendFile(error);
     }
   };
 }
